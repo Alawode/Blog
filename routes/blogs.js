@@ -5,14 +5,14 @@ var middleware = require('../middleware');
 
 //====================
 // Index route
-router.get('/', function(req, res){
-    console.log(req.user);
-    Blog.find({}, function(err, blogs){
-        if(err){
-            console.log(err);
-        }else{
-          res.render('blogs/index', {blogs:blogs});  
-        }
+router.get("/", function(req, res){
+    // Get all blogs from DB
+    Blog.find({}, function(err, allblogs){
+       if(err){
+           console.log(err);
+       } else {
+          res.render("blogs/index",{blogs: allblogs, page: 'blogs'});
+       }
     });
 });
 //=============================
@@ -26,7 +26,7 @@ router.post('/',middleware.isLoggedIn, function(req, res){
         username: req.user.username
     };
     var newBlog = {name:name, image:image, description:desc, author:author};
-    
+
     Blog.create(newBlog, function(err, newlyCreated){
         if(err){
             console.log(err);
@@ -35,10 +35,10 @@ router.post('/',middleware.isLoggedIn, function(req, res){
             res.redirect('/blogs');
         }
     });
-    
+
 });
 //================================
-// New blog form page 
+// New blog form page
 router.get('/new', middleware.isLoggedIn, function(req, res) {
     res.render('blogs/new');
 });
@@ -50,17 +50,17 @@ router.get('/:id', function(req, res){
             console.log(err);
         }else{
             console.log(foundBlog);
-            res.render('blogs/show', {blog:foundBlog});  
+            res.render('blogs/show', {blog:foundBlog});
         }
     });
 });
 
 //=============================
-//Edit blog 
-router.get('/:id/edit',middleware.checkBlogOwnership, function(req, res){  
+//Edit blog
+router.get('/:id/edit',middleware.checkBlogOwnership, function(req, res){
     Blog.findById(req.params.id, function(err, foundBlog ){
         res.render('blogs/edit', {blog: foundBlog});
-   
+
     });
 });
 
@@ -84,7 +84,7 @@ router.delete('/:id', middleware.checkBlogOwnership, function(req, res){
        if (err){
            res.redirect('/blogs');
        } else{
-          res.redirect('/blogs'); 
+          res.redirect('/blogs');
        }
     });
 });

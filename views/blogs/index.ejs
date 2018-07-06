@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
 
-<div class='container'>
+
     <header class="jumbotron">
         <div class='container'>
           <h1 >Sophie's Blog</h1>
@@ -12,11 +12,11 @@
           <hr class="my-4">
         </div>
     </header>
-    
+
     <div class='column'>
         <% blogs.forEach(function(blog){ %>
             <div  class=''>
-                
+
                 <div class='thumbnail'>
                     <img class='blogImg'src='<%= blog.image %>'>
                     <div class='caption'>
@@ -26,11 +26,11 @@
                         <a class='btn btn-primary'href='/blogs/<%=blog._id%>'>More info</a>
                     </p>
                 </div>
-                
+
             </div>
         <% }); %>
-        
-    </div>    
-</div>
+
+    </div>
+
 
 <% include ../partials/footer %>
