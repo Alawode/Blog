@@ -8,13 +8,14 @@
                 <li class='list-group-item'>Info 2</li>
                 <li class='list-group-item'>Info 3</li>
             </div>
+             <div id="map"></div>
         </div>
 
         <div class='col-md-9'>
             <div class='thumbnail'>
                 <img class='img-responsive show-image'src='<%= blog.image %>'>
                 <div class='caption-full'>
-                    <h4 class='pull-right'>9.00/night</h4>
+                    <h4 class="pull-right">$<%= blog.cost %>/night</h4>
                     <h4><a><%= blog.name %></a></h4>
                     <p><%= blog.description %></p>
                     <p>
@@ -30,8 +31,6 @@
 
                     <% } %>
                 </div>
-
-
             <div class='well'>
                 <div class='text-right'>
                     <a class='btn btn-success'href='/blogs/<%= blog._id %>/comments/new'>Add new Comment</a>
@@ -65,6 +64,34 @@
     </div>
 </div>
 
+<script>
+  function initMap() {
+    var lat = <%= blog.lat %>;
+    var lng = <%= blog.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= blog.name %><br />
+      <%= blog.location %></strong>
+      <p><%= blog.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUAiTPRwvhGRi8uX352CIUARb6hdazTYI&callback=initMap"></script>
 
 
 

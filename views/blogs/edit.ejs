@@ -12,8 +12,15 @@
                  <div class='form-group'>
                     <input class='form-control' type='text' name='blog[image]' value='<%= blog.image%>'>
                 </div>
+                <div class="form-group">
+                  <input class="form-control" type="number" name="cost" value="<%= blog.cost %>" step="0.01" min="0" required>
+                </div>
                 <div class='form-group'>
                     <textarea class='form-control' type='text' name='blog[description]'><%= blog.description %></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="location">Location</label>
+                  <input class="form-control" type="text" name="location" id="location" value="<%= blog.location %>">
                 </div>
                  <div class='form-group'>
                     <button class='btn  btn-primary btn-block'>Submit!</button>

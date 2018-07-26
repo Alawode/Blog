@@ -42,12 +42,13 @@ router.get("/", function(req, res){
 router.post('/',middleware.isLoggedIn, function(req, res){
     var name= req.body.name;
     var image = req.body.image;
+    var cost = req.body.cost;
     var desc = req.body.description;
     var author ={
         id: req.user._id,
         username: req.user.username
     };
-    var newBlog = {name:name, image:image, description:desc, author:author};
+    var newBlog = {name: name, image: image, cost: cost, description: desc, author:author};
 
     Blog.create(newBlog, function(err, newlyCreated){
         if(err){
@@ -91,6 +92,7 @@ router.get('/:id/edit',middleware.checkBlogOwnership, function(req, res){
 
 router.put('/:id', middleware.checkBlogOwnership,function(req, res){
     //find and update the blog
+    var newData = {name: req.body.name, image: req.body.image, cost: req.body.cost, description: req.body.description};
     Blog.findByIdAndUpdate(req.params.id,req.body.blog, function(err, updatedBlog){
         if(err){
             res.redirect('/blogs');
