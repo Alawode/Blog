@@ -1,6 +1,8 @@
 require('dotenv').config();
 require('./config/config');
 
+const keys = require('./config/keys');
+
 const express     = require('express'),
     app         = express(),
     bodyParser  = require('body-parser'),
@@ -20,7 +22,7 @@ var commentRoutes = require("./routes/comments"),
     blogRoutes    = require('./routes/blogs'),
     indexRoutes    = require('./routes/index');
 
-mongoose.connect('mongodb://localhost/sophie_blog');
+mongoose.connect(keys.mongoURI);
 
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
