@@ -22,6 +22,7 @@ var commentRoutes = require("./routes/comments"),
     blogRoutes    = require('./routes/blogs'),
     indexRoutes    = require('./routes/index');
 
+//mongolab server
 mongoose.connect(keys.mongoURI);
 
 app.use(require('morgan')('combined'));
