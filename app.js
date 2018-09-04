@@ -60,8 +60,8 @@ app.use('/blogs/:id/comments',commentRoutes);
 app.use('/blogs',blogRoutes);
 
 
+const port=process.env.PORT || 3000;
 
-
-app.listen(process.env.PORT, process.env.IP, function(req,res){
+app.listen(port, process.env.IP, function(req,res){
     console.log("Blog server is running...");
 });

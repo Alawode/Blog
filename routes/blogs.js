@@ -54,7 +54,6 @@ router.post('/',middleware.isLoggedIn, function(req, res){
         if(err){
             console.log(err);
         }else{
-            console.log (newlyCreated);
             res.redirect('/blogs');
         }
     });
@@ -72,7 +71,7 @@ router.get('/:id', function(req, res){
         if(err){
             console.log(err);
         }else{
-            console.log(foundBlog);
+            
             res.render('blogs/show', {blog:foundBlog});
         }
     });
